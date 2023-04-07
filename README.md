@@ -26,9 +26,14 @@ python manage.py import_data
 python manage.py runsever
 
 ```
-
+Test user data:
+Username: mike
+Password: Abc123123
 
 
 ## Additional info
 
 Created for educational purposes. 
+
+## Preview
+https://github.com/wenerikk5/dev_rooms/blob/06d2abc16d5cbdbf38f508d0ce39be0b6125d029/media/base/Preview.png
