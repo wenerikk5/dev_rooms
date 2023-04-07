@@ -25,11 +25,11 @@ python manage.py import_data
 # Run server (default in Debug mode)
 python manage.py runsever
 
-```
-Test user data:\n
-Username: mike\n
-Password: Abc123123
+# Test user data:
+# Username: mike
+# Password: Abc123123
 
+```
 
 ## Additional info
 
