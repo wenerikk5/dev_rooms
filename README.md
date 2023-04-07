@@ -26,8 +26,8 @@ python manage.py import_data
 python manage.py runsever
 
 ```
-Test user data:
-Username: mike
+Test user data:\n
+Username: mike\n
 Password: Abc123123
 
 
