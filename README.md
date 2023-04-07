@@ -36,4 +36,5 @@ Password: Abc123123
 Created for educational purposes. 
 
 ## Preview
-https://github.com/wenerikk5/dev_rooms/blob/06d2abc16d5cbdbf38f508d0ce39be0b6125d029/media/base/Preview.png
+<img src="https://github.com/wenerikk5/dev_rooms/blob/06d2abc16d5cbdbf38f508d0ce39be0b6125d029/media/base/Preview.png" alt="img" width="600" height='600'>
+
