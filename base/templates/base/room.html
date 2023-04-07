@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-9">
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <small>{{ room.host.username }}<a href="{% url 'profile' room.host.id %}" class="font-link"><strong>@{{ room.host.username }}</strong></a></small> <small>({{ room.created|timesince }})</small>
+                </div>
+                <div>
+                    {% if user == room.host %}
+                        <a href="{% url 'edit-room' room.id %}" class="badge bg-secondary text-light">edit</a>
+                        <a href="{% url 'delete-room' room.id %}" class="badge bg-secondary text-light">delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>{{ room.head }}</strong></p>
+                <p>{{ room.description }}</p>
+                {% if room.link %}
+                    <p><a href="{{ room.link }}" class="font-link-secondary">{{ room.link|truncatechars:70 }}</a></p>
+                {% endif %}
+                <div class="my-1">
+                    {% thumbnail room.image "600x250" crop="top" upscale=True as im %}
+                        <img class="card-img" src="{{ im.url }}">
+                    {% endthumbnail %}
+                </div>
+                <p></p>
+                <div class="d-flex justify-content-end">
+                    <span class="badge bg-main2 text-light">{{ room.topic.name }}</span>
+                </div>
+                <div class="pl-5">
+
+                    {% for message in room_messages %}
+                    <div class="comment my-2 border rounded bg-light px-2 py-1 ">
+                        <div class=" d-flex justify-content-between">
+                            <div>
+                                <small><a href="{% url 'profile' message.author.id %}" class="font-link"><strong>@{{ message.author.username }}</strong></a><span> ({{ message.created|timesince }})</span></small>
+                            </div>
+                            <div>
+                                {% if user == message.author %}
+                                    <a href="{% url 'delete-message' message.id %}" class="badge bg-secondary text-light">delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <p>{{ message.body }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% if request.user.is_authenticated %}
+                    <form action="" method="POST" class="mt-2">
+                        {% csrf_token %}
+                        <input class="form-control bg-light" type="text" name="body" id="id_body" placeholder="Type your message ...">
+                    </form>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    participants-->
+    <div class="col-3">
+        <div class="card">
+            <div class="card-header ">
+                <strong class="h6">PARTICIPANTS</strong>
+            </div>
+
+            <div class="card-body px-2 py-2">
+                {% for u in participants %}
+                <div class="comment mb-2 bg-light border rounded px-2 py-2">
+                    <small>{{ u.username }}</small><br>
+                    <small><a href="{% url 'profile' u.id %}" class="font-link"><strong>@{{ u.username }}</strong></a></small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

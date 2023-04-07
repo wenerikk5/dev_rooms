@@ -1,0 +1,6 @@
+﻿user_id,password,is_superuser,is_staff,is_active,username,email
+1,123,1,1,1,root,root@root.com
+2,Abc123123,0,0,1,mike,zelik900@gmail.com
+3,Abc123123,0,0,1,john,zelik800@gmail.com
+4,Abc123123,0,0,1,rebecca,zelik1@gmail.com
+5,Abc123123,0,0,1,tom,zelik200@gmail.com

@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-header ">
+        <strong class="h6">RECENT ACTIVITIES</strong>
+    </div>
+
+    <div class="card-body px-2 py-2">
+        {% for message in rooms_messages %}
+        <div class="comment mb-2 bg-light border rounded px-2 py-2 ">
+            <small><a href="{% url 'profile' message.author.id %}" class="font-link"><strong>@{{ message.author.username }}</strong></a></small>
+            <small>{{ message.created|timesince }}</small><br>
+            <small>replied to post</small><br>
+            <small><a href="{% url 'room' message.room.id %}" class="font-link-secondary font-weight-bold">{{ message.room.head|truncatechars:25 }}</a></small>
+
+            <div class="border rounded bg-white text-dark my-1 px-2 py-2">
+                <small>{{ message|truncatechars:30 }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>

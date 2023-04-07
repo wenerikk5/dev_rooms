@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-3 my-1" >
+        {% include 'base/topics_component.html' %}
+    </div>
+
+    <div class="col-6 my-1">
+        <div class="text-center my-4">
+            <h5>Sample User</h5>
+            <p class="font-link"><strong>@{{ user.username }}</strong></p>
+        </div>
+        <h6 class="text-secondary">ABOUT</h6>
+        <p>Some information about Sample User skills.  </p>
+        <h6 class="text-secondary mt-4">PARTICIPATED ROOMS</h6>
+
+        {% for room in rooms %}
+        <div class="card my-2">
+            <div class="card-header py-2 d-flex justify-content-between">
+                <div>
+                    <small>{{ room.host.username }}<a href="{% url 'profile' room.host.id %}" class="font-link"><strong>@{{ room.host.username }}</strong></a></small>
+                </div>
+                <div>
+                {% if user == room.host %}
+                    <a href="{% url 'edit-room' room.id %}" class="badge bg-secondary text-light">edit</a>
+                    <a href="{% url 'delete-room' room.id %}" class="badge bg-secondary text-light">delete</a>
+                {% endif %}
+                </div>
+            </div>
+            <div class="card-body py-3">
+                <p><a href="{% url 'room' room.id %}" class="text-dark">{{ room.head }}</a></p>
+                <div class="my-1">
+                    {% thumbnail room.image "600x250" crop="top" upscale=True as im %}
+                            <img class="card-img" src="{{ im.url }}">
+                    {% endthumbnail %}
+                </div>
+                <div class="d-flex justify-content-between align-items-end">
+                    <small><a href="{% url 'room' room.id %}" class="text-dark font-weight-bold">Read details ...</a></small>
+                    <span class="badge bg-main2 text-light">{{ room.topic.name }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-3 my-1">
+        {% include 'base/activities_component.html' %}
+
+    </div>
+
+</div>
+
+{% endblock content %}

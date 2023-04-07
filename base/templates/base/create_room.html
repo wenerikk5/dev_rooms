@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="row py-5">
+    <div class="col-3"></div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header text-center">
+                <strong class="h6">CREATE/UPDATE ROOM</strong>
+            </div>
+
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+<!--                    {{ form.head|as_crispy_field }}-->
+<!--                    {{ form.description|as_crispy_field }}-->
+<!--                    {{ form.topic|as_crispy_field }}-->
+
+                    <div class="form-group">
+                        <label for="room_topic">Enter a Topic*</label>
+                        <input required type="text" value="{{ room.topic.name }}" name="topic" list="topic-list" class="form-control">
+                        <datalist id="topic-list">
+                          <select id="room_topic" >
+                            {% for topic in topics %}
+                                <option value="{{ topic.name }}">{{ topic.name }}</option>
+                            {% endfor %}
+                          </select>
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_head">Name*</label>
+                        {{ form.head }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_description">Description</label>
+                        {{ form.description }}
+                    </div>
+                    <div>
+                        {{ form.link|as_crispy_field }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.image }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3"></div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% load thumbnail %}
+
+<div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h6>ROOMS</h6>
+        <div class="text-secondary">
+            {{ rooms.count }} Rooms available
+        </div>
+    </div>
+    <div class="">
+        <a href="{% url 'create-room' %}" class="btn btn-outline-secondary my-2 my-sm-0">Add Room</a>
+    </div>
+</div>
+
+
+{% for room in rooms %}
+<div class="card my-2">
+    <div class="card-header py-2 d-flex justify-content-between">
+        <div>
+            <small>{{ room.host.username }}<a href="{% url 'profile' room.host.id %}" class="font-link"><strong>@{{ room.host.username }}</strong></a></small>
+        </div>
+        <div>
+        {% if user == room.host %}
+            <a href="{% url 'edit-room' room.id %}" class="badge bg-secondary text-light">edit</a>
+            <a href="{% url 'delete-room' room.id %}" class="badge bg-secondary text-light">delete</a>
+        {% endif %}
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <p class="mb-2">{{ room.head|truncatechars:300 }}</p>
+        <div class="my-2">
+            {% thumbnail room.image "600x250" crop="center" upscale=True as im %}
+                <img class="card-img" src="{{ im.url }}">
+            {% endthumbnail %}
+        </div>
+        <div class="d-flex justify-content-between align-items-end mt-2">
+            <small><a href="{% url 'room' room.id %}" class="font-link-secondary font-weight-bold">See details ...</a></small>
+            <span class="badge bg-main2 text-light">{{ room.topic.name }}</span>
+        </div>
+    </div>
+</div>
+{% endfor %}

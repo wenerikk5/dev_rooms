@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="row align-items-center pt-2">
+
+  <div class="col-3">
+    <h1><a href="{% url 'home' %}" class=""><img src="{% static 'images/dev.png' %}" style="width: 130px; height: 40px;" class="ml-5 mt-2" alt="LOGO"></a></h1>
+  </div>
+
+  <div class="col-7">
+    <form class="form-inline" method="GET" action="{% url 'home' %}">
+      <input class="form-control mr-sm-2 bg-light" type="search"  name="q" placeholder="Search ..." aria-label="Search">
+    </form>
+  </div>
+
+  <div class="col-2 d-flex flex-column align-items-center">
+    {% if user.is_authenticated %}
+      <div class="">
+        <small>Welcome, <a href="{% url 'profile' user.id %}" class="font-link"><strong>@{{ user.username }}</strong></a></small>
+      </div>
+      <div class="justify-content-center">
+        <a href="{% url 'logout' %}" class="badge bg-secondary text-light">Logout</a>
+      </div>
+    {% else %}
+      <a href="{% url 'login' %}"><button class="btn btn-outline-secondary">Login</button></a>
+    {% endif %}
+  </div>
+
+</div>
+<hr>
+
+
